@@ -31,7 +31,7 @@
 				<muleVersion>4.2.2</muleVersion>
 				<username>${username}</username>
 				<password>${password}</password>
-				<environment>Sandbox</environment>
+				<environment>${env}</environment>
 				<applicationName>mulesoft-app</applicationName>
 				<workers>${workers}</workers>
 				<workerType>${workerType}</workerType>
