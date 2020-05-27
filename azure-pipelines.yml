@@ -14,3 +14,4 @@ jobs:
     steps:
       - script: mvn clean install
       - script: mvn package
+      - script: ls -ltrh target/*
