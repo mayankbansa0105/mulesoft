@@ -8,8 +8,9 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-Jobs:
-- job: Build
-  steps:
-  - bash: mvn clean
-  - bash: mvn package
+  
+jobs:
+  - job: Build
+    steps:
+      - script: mvn clean install
+      - script: mvn package
