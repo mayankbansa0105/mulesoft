@@ -19,7 +19,7 @@
 	</properties>
 
 	<build>
-	<finalName>testnew-${Build.BuildId}</finalName>
+	<finalName>testnew-${BUILD_NUMBER}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
