@@ -23,9 +23,7 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
-
-- task: PublishBuildArtifacts@1
+- task: CopyFiles@2
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/target'
-    ArtifactName: '*jar'
-    publishLocation: 'Container'
+    Contents: 'target/*jar'
+    TargetFolder: '$(build.artifactstagingdirectory)'
