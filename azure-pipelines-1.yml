@@ -1,7 +1,12 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+parameters:
+  - name: Username
+    type: string
+    default: 
+  - name: Env
+    default: Sandbox
+    values:
+    - Sandbox
+    - Runtime
 
 trigger:
 - master
@@ -14,7 +19,7 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'package deploy'
-    options: '-Dusername=mayankbansal1508 -Dpassword=5Vnzur_276332 -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -DmuleDeploy'
+    options: '-Dusername=${{ parameters.Username }} -Dpassword=5Vnzur_276332 -Denv=${{ parameters.Env }} -Dworkers=1 -DworkerType=Micro -DmuleDeploy'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
