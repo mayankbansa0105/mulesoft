@@ -5,8 +5,8 @@ parameters:
   - name: Env
     default: Sandbox
     values:
-    - Sandbox
-    - Runtime
+    - dev
+    - uat
 
 variables:
  - group: client-credential
@@ -22,7 +22,7 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'package deploy'
-    options: '-Dusername=$(${{ parameters.Env }}.Username) -Dpassword=$(${{ parameters.Env }}.password) -Denv=${{ parameters.Env }} -Dworkers=1 -DworkerType=Micro -DmuleDeploy'
+    options: '-Dusername=$(${{ parameters.Env }}.Username) -Dpassword=$(${{ parameters.Env }}.password) -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -DmuleDeploy'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
