@@ -19,7 +19,7 @@
 	</properties>
 
 	<build>
-	<finalName>testnew-${BUILD_NUMBER}</finalName>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
@@ -32,7 +32,7 @@
 				<username>${username}</username>
 				<password>${password}</password>
 				<environment>${env}</environment>
-				<applicationName>mulesoft-app</applicationName>
+				<applicationName>mulesoftapp</applicationName>
 				<workers>${workers}</workers>
 				<workerType>${workerType}</workerType>
 				<objectStoreV2>true</objectStoreV2>
