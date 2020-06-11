@@ -13,6 +13,7 @@ steps:
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
+    goals: 'package deploy'
     options: '-Dusername=mayankbansal1508 -Dpassword=5Vnzur_276332 -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -DmuleDeploy'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
