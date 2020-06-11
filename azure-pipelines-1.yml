@@ -1,7 +1,4 @@
 parameters:
-  - name: Username
-    type: string
-    default: 
   - name: Env
     default: Sandbox
     values:
