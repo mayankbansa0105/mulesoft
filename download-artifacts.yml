@@ -24,3 +24,28 @@ stages:
                PathtoPublish: '$(Build.ArtifactStagingDirectory)'
                ArtifactName: 'pom'
                publishLocation: 'Container'
+  - stage: DEVDeployJob
+    jobs:
+      - deployment: Dev
+        environment: dev
+        strategy:
+         runOnce:
+            deploy:
+              steps:
+                - task: DownloadPipelineArtifact@2
+                  inputs:
+                    buildType: 'current'
+                    artifactName: 'pom'
+                    targetPath: '$(Pipeline.Workspace)'
+                    
+                - script: ls -ltrh $(Pipeline.Workspace)
+
+  - stage: QADeployJob
+    jobs:
+      - deployment: QA
+        environment: uat
+        strategy:
+         runOnce:
+            deploy:
+              steps:
+                - script: mvn --version
