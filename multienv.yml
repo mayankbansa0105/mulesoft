@@ -57,15 +57,15 @@ stages:
                     
                 - task: Maven@3
                   inputs:
-                   mavenPomFile: 'pom.xml'
-                   goals: 'mule:deploy'
-                   options: '-Dusername=$(dev.Username) -Dpassword=$(dev.password) -Denv=Sandbox -Dworkers=1 -DworkerType=Micro'
-                   publishJUnitResults: false
-                   javaHomeOption: 'JDKVersion'
-                   mavenVersionOption: 'Default'
-                   mavenAuthenticateFeed: false
-                   effectivePomSkip: false
-                   sonarQubeRunAnalysis: false
+                    mavenPomFile: '$(Pipeline.Workspace)/pom.xml'
+                    goals: 'mule:deploy'
+                    options: '-Dusername=$(dev.Username) -Dpassword=$(dev.password) -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -Dmule.artifact=$(Pipeline.Workspace)/target/*jar'
+                    publishJUnitResults: false
+                    javaHomeOption: 'JDKVersion'
+                    mavenVersionOption: 'Default'
+                    mavenAuthenticateFeed: false
+                    effectivePomSkip: false
+                    sonarQubeRunAnalysis: false
   - stage: QADeployJob
     jobs:
       - deployment: QA
