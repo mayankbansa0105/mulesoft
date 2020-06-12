@@ -1,6 +1,6 @@
 parameters:
   - name: Env
-    default: Sandbox
+    default: dev
     values:
     - dev
     - uat
