@@ -2,7 +2,8 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-
+variables:
+- group: client-credential
 trigger:
 - master
 
@@ -54,7 +55,17 @@ stages:
                     artifactName: 'mulesoft'
                     targetPath: '$(Pipeline.Workspace)'
                     
-                - script: ls -lrth $(Pipeline.Workspace)
+                - task: Maven@3
+                  inputs:
+                   mavenPomFile: 'pom.xml'
+                   goals: 'mule:deploy'
+                   options: '-Dusername=$(dev.Username) -Dpassword=$(dev.password) -Denv=Sandbox -Dworkers=1 -DworkerType=Micro'
+                   publishJUnitResults: false
+                   javaHomeOption: 'JDKVersion'
+                   mavenVersionOption: 'Default'
+                   mavenAuthenticateFeed: false
+                   effectivePomSkip: false
+                   sonarQubeRunAnalysis: false
   - stage: QADeployJob
     jobs:
       - deployment: QA
@@ -63,4 +74,4 @@ stages:
          runOnce:
             deploy:
               steps:
-                - script: mvn --version
+                - script: ls -ltrh $(Pipeline.Workspace)
