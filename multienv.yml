@@ -44,7 +44,7 @@ stages:
 
 
 
-  - stage: DEVDeployJob
+  - stage: DeployJob
     jobs:
       - deployment: Dev
         environment: dev
@@ -59,9 +59,6 @@ stages:
                   artifactName: 'mulesoft'
                   downloadPath: '$(System.ArtifactsDirectory)'
               - script: ls -ltrh $(System.ArtifactsDirectory)
-              
-  - stage: QADeployJob
-    jobs:
       - deployment: UAT
         environment: uat
         strategy:
