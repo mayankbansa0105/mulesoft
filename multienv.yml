@@ -46,19 +46,23 @@ stages:
 
   - stage: DeployJob
     jobs:
-      - deployment: Dev
-        environment: dev
-        strategy:
-         runOnce:
-            deploy:
-              steps:
+      - job: DownloadArtifact
+        steps:
               - task: DownloadBuildArtifacts@0
                 inputs:
                   buildType: 'current'
                   downloadType: 'single'
                   artifactName: 'mulesoft'
                   downloadPath: '$(System.ArtifactsDirectory)'
-              - script: ls -ltrh $(System.ArtifactsDirectory)
+              
+      - deployment: Dev
+        environment: dev
+        strategy:
+         runOnce:
+            deploy:
+             steps:
+               - script: ls -ltrh $(System.ArtifactsDirectory) 
+
       - deployment: UAT
         environment: uat
         strategy:
