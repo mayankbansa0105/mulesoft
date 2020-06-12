@@ -49,6 +49,8 @@ stages:
          runOnce:
             deploy:
               steps:
+                - script: echo $($(ENVIRONMENT.NAME).Username)
+                - script:  echo $($(ENVIRONMENT.NAME).password)
                 - task: DownloadPipelineArtifact@2
                   inputs:
                     buildType: 'current'
@@ -59,7 +61,7 @@ stages:
                   inputs:
                     mavenPomFile: '$(Pipeline.Workspace)/pom.xml'
                     goals: 'mule:deploy'
-                    options: '-Dusername=mayankbansal0105 -Dpassword=5Vnzur_276332 -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -Dmule.artifact=$(Pipeline.Workspace)/target/muledemo-1.0.0-SNAPSHOT-mule-application.jar'
+                    options: '-Dusername=mayankbansal1508 -Dpassword=5Vnzur_276332 -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -Dmule.artifact=$(Pipeline.Workspace)/target/muledemo-1.0.0-SNAPSHOT-mule-application.jar'
                     publishJUnitResults: false
                     javaHomeOption: 'JDKVersion'
                     mavenVersionOption: 'Default'
@@ -74,4 +76,22 @@ stages:
          runOnce:
             deploy:
               steps:
-                - script: ls -ltrh $(Pipeline.Workspace)
+                - script: echo $($(ENVIRONMENT.NAME).Username)
+                - script:  echo $($(ENVIRONMENT.NAME).password)
+                - task: DownloadPipelineArtifact@2
+                  inputs:
+                    buildType: 'current'
+                    artifactName: 'mulesoft'
+                    targetPath: '$(Pipeline.Workspace)'
+                    
+                - task: Maven@3
+                  inputs:
+                    mavenPomFile: '$(Pipeline.Workspace)/pom.xml'
+                    goals: 'mule:deploy'
+                    options: '-Dusername=guru0105 -Dpassword=5Vnzur_276332 -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -Dmule.artifact=$(Pipeline.Workspace)/target/muledemo-1.0.0-SNAPSHOT-mule-application.jar'
+                    publishJUnitResults: false
+                    javaHomeOption: 'JDKVersion'
+                    mavenVersionOption: 'Default'
+                    mavenAuthenticateFeed: false
+                    effectivePomSkip: false
+                    sonarQubeRunAnalysis: false
