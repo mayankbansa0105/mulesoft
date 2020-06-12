@@ -59,7 +59,7 @@ stages:
                   inputs:
                     mavenPomFile: '$(Pipeline.Workspace)/pom.xml'
                     goals: 'mule:deploy'
-                    options: '-Dusername=$($(Environment.Name).Username) -Dpassword=$($(Environment.Name).password) -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -Dmule.artifact=$(Pipeline.Workspace)/target/muledemo-1.0.0-SNAPSHOT-mule-application.jar'
+                    options: '-Dusername=mayankbansal0105 -Dpassword=5Vnzur_276332 -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -Dmule.artifact=$(Pipeline.Workspace)/target/muledemo-1.0.0-SNAPSHOT-mule-application.jar'
                     publishJUnitResults: false
                     javaHomeOption: 'JDKVersion'
                     mavenVersionOption: 'Default'
