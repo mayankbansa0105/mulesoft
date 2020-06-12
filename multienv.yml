@@ -12,18 +12,34 @@ pool:
 stages:
   - stage: BuildJob
     jobs:
-      - job: maven
+      - job: Build
         steps:
          - task: Maven@3
            inputs:
-            mavenPomFile: 'pom.xml'
-            publishJUnitResults: true
-            testResultsFiles: '**/surefire-reports/TEST-*.xml'
-            javaHomeOption: 'JDKVersion'
-            mavenVersionOption: 'Default'
-            mavenAuthenticateFeed: false
-            effectivePomSkip: false
-            sonarQubeRunAnalysis: false
+             mavenPomFile: 'pom.xml'
+             publishJUnitResults: false
+             javaHomeOption: 'JDKVersion'
+             mavenVersionOption: 'Default'
+             mavenAuthenticateFeed: false
+             effectivePomSkip: false
+             sonarQubeRunAnalysis: false
+      - job: CopyArtifacts
+        steps:
+        - task: CopyFiles@2
+          inputs:
+            Contents: |
+              target/*jar
+              pom.xml
+            TargetFolder: '$(build.artifactstagingdirectory)'
+
+      - job: PublishArtifacts
+        steps:
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'mulesoft'
+            publishLocation: 'Container'
+
 
 
 
