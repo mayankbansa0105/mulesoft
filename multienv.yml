@@ -31,7 +31,7 @@ stages:
   - stage: DEVDeployJob
     jobs:
       - deployment: Dev
-        environment: Dev
+        environment: dev
         strategy:
          runOnce:
             deploy:
@@ -39,8 +39,8 @@ stages:
                 - script: echo $(Environment.Name)
   - stage: QADeployJob
     jobs:
-      - deployment: QA
-        environment: QA
+      - deployment: UAT
+        environment: uat
         strategy:
          runOnce:
             deploy:
