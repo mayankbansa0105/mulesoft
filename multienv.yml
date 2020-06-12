@@ -53,6 +53,7 @@ stages:
             deploy:
               steps:
                 - script: echo $(Environment.Name)
+                - script: ls -ltrh $(build.artifactstagingdirectory)
   - stage: QADeployJob
     jobs:
       - deployment: UAT
