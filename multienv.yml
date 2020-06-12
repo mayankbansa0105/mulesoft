@@ -24,6 +24,7 @@ stages:
              effectivePomSkip: false
              sonarQubeRunAnalysis: false
       - job: CopyArtifacts
+        dependsOn: Build
         steps:
         - task: CopyFiles@2
           inputs:
@@ -33,6 +34,7 @@ stages:
             TargetFolder: '$(build.artifactstagingdirectory)'
 
       - job: PublishArtifacts
+        dependsOn: CopyArtifacts
         steps:
         - task: PublishBuildArtifacts@1
           inputs:
