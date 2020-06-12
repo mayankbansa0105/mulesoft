@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: 
+    jobs:
+      -  job: Copy and publish
+         steps:
+           - task: CopyFiles@2
+             inputs:
+               Contents: 'pom.xml'
+               TargetFolder: '$(build.artifactstagingdirectory)'
+
+           - task: PublishBuildArtifacts@1
+             inputs:
+               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+               ArtifactName: 'pom'
+               publishLocation: 'Container'
