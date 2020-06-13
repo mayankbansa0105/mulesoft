@@ -21,3 +21,4 @@ stages:
               steps:
                  - script: echo $(ENVIRONMENT.NAME)
                  - script: echo $(ENVIRONMENT.NAME).Username
+                 - script: echo ${$(ENVIRONMENT.NAME).Username}
