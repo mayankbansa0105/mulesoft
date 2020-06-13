@@ -19,6 +19,6 @@ stages:
          runOnce:
             deploy:
               steps:
-                 - script: echo $(ENVIRONMENT.NAME)
-                 - script: echo $(ENVIRONMENT.NAME).Username
+                 - script: echo $(Build.BuildId)
+                 - script: echo $(Build.BuildNumber)
                  - script: echo $($(ENVIRONMENT.NAME).Username)
