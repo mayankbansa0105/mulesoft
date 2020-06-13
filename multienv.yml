@@ -19,4 +19,4 @@ stages:
          runOnce:
             deploy:
               steps:
-                 - script: echo $(Environmnet.Name)
+                 - script: echo $(ENVIRONMENT.NAME)
