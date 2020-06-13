@@ -11,15 +11,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-  - stage: BuildJob
-    jobs:
-      - job: MavenBuild
-        steps:
-          - script: echo job started
-
-
-
-
   - stage: DEVDeployJob
     jobs:
       - deployment: Dev
