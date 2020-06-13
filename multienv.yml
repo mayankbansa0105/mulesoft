@@ -15,28 +15,7 @@ stages:
     jobs:
       - job: MavenBuild
         steps:
-         - task: Maven@3
-           inputs:
-            mavenPomFile: 'pom.xml'
-            publishJUnitResults: true
-            testResultsFiles: '**/surefire-reports/TEST-*.xml'
-            javaHomeOption: 'JDKVersion'
-            mavenVersionOption: 'Default'
-            mavenAuthenticateFeed: false
-            effectivePomSkip: false
-            sonarQubeRunAnalysis: false
-
-         - task: CopyFiles@2
-           inputs:
-            Contents: |
-                  target/*jar
-                  pom.xml
-            TargetFolder: '$(build.artifactstagingdirectory)'
-         - task: PublishBuildArtifacts@1
-           inputs:
-             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-             ArtifactName: 'mulesoft'
-             publishLocation: 'Container'
+          - script: echo job started
 
 
 
@@ -49,49 +28,4 @@ stages:
          runOnce:
             deploy:
               steps:
-                - script: echo $($(ENVIRONMENT.NAME).Username)
-                - script:  echo $($(ENVIRONMENT.NAME).password)
-                - task: DownloadPipelineArtifact@2
-                  inputs:
-                    buildType: 'current'
-                    artifactName: 'mulesoft'
-                    targetPath: '$(Pipeline.Workspace)'
-                    
-                - task: Maven@3
-                  inputs:
-                    mavenPomFile: '$(Pipeline.Workspace)/pom.xml'
-                    goals: 'mule:deploy'
-                    options: '-Dusername=mayankbansal1508 -Dpassword=5Vnzur_276332 -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -Dmule.artifact=$(Pipeline.Workspace)/target/muledemo-1.0.0-SNAPSHOT-mule-application.jar'
-                    publishJUnitResults: false
-                    javaHomeOption: 'JDKVersion'
-                    mavenVersionOption: 'Default'
-                    mavenAuthenticateFeed: false
-                    effectivePomSkip: false
-                    sonarQubeRunAnalysis: false
-  - stage: QADeployJob
-    jobs:
-      - deployment: QA
-        environment: uat
-        strategy:
-         runOnce:
-            deploy:
-              steps:
-                - script: echo $($(ENVIRONMENT.NAME).Username)
-                - script:  echo $($(ENVIRONMENT.NAME).password)
-                - task: DownloadPipelineArtifact@2
-                  inputs:
-                    buildType: 'current'
-                    artifactName: 'mulesoft'
-                    targetPath: '$(Pipeline.Workspace)'
-                    
-                - task: Maven@3
-                  inputs:
-                    mavenPomFile: '$(Pipeline.Workspace)/pom.xml'
-                    goals: 'mule:deploy'
-                    options: '-Dusername=guru0105 -Dpassword=5Vnzur_276332 -Denv=Sandbox -Dworkers=1 -DworkerType=Micro -Dmule.artifact=$(Pipeline.Workspace)/target/muledemo-1.0.0-SNAPSHOT-mule-application.jar'
-                    publishJUnitResults: false
-                    javaHomeOption: 'JDKVersion'
-                    mavenVersionOption: 'Default'
-                    mavenAuthenticateFeed: false
-                    effectivePomSkip: false
-                    sonarQubeRunAnalysis: false
+                 - script: echo $Environmnet.Name
